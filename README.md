@@ -27,7 +27,7 @@ You can create a new state machine by doing something like:
 ```lua
 local fsm = require "fsm"
 
-local alert = fsm.create({
+local alert = fsm.new({
   initial = "green",
   events = {
     {name = "warn",  from = "green",  to = "yellow"},
@@ -56,7 +56,7 @@ along with the following:
 If you don't specify any initial state, the state machine will be in the `none` state, and you would need to provide an event to take it out of this state:
 
 ```lua
-local alert = fsm.create({
+local alert = fsm.new({
   events = {
     {name = "startup", from = "none",  to = "green"},
     {name = "panic",   from = "green", to = "red"  },
@@ -72,7 +72,7 @@ print(alert.current) -- "green"
 If you specify the name of your initial state, then an implicit `startup` event will be created for you and fired when the state machine is constructed:
 
 ```lua
-local alert = fsm.create({
+local alert = fsm.new({
   initial = "green",
   events = {
     {name = "panic", from = "green", to = "red"  },
@@ -86,7 +86,7 @@ print(alert.current) -- "green"
 If your object already has a `startup` method you can use a different name for the initial event:
 
 ```lua
-local alert = fsm.create({
+local alert = fsm.new({
   initial = {state = "green", event = "init"},
   events = {
     {name = "panic", from = "green", to = "red"  },
@@ -100,7 +100,7 @@ print(alert.current) -- "green"
 Finally, if you want to wait to call the initial state transition event until a later date you can defer it:
 
 ```lua
-local alert = fsm.create({
+local alert = fsm.new({
   initial = {state = "green", event = "init", defer = true},
   events = {
     {name = "panic", from = "green", to = "red"  },
@@ -147,7 +147,7 @@ Callbacks can be specified when the state machine is first created:
 ```lua
 local fsm = require "fsm"
 
-local alert = fsm.create({
+local alert = fsm.new({
   initial = "green",
   events = {
     {name = "warn",  from = "green",  to = "yellow"},
@@ -185,7 +185,7 @@ You may need to execute additional code during a state transition, and ensure th
 One way to do this is to return `fsm.DEFERRED` from your `on_leave_state` handler, and the state machine will be put on hold until you are ready to confirm the transition by calling the `confirm` method, or cancel it by calling the `cancel` method:
 
 ```lua
-local screens = fsm.create({
+local screens = fsm.new({
   initial = "menu",
   events = {
     {name = "play", from = "menu", to = "game"},

@@ -5,7 +5,7 @@ describe("fsm", function ()
 
   describe("events & states", function ()
     before_each(function ()
-      m = fsm.create({
+      m = fsm.new({
         initial = "green",
         events = {
           {name = "warn",  from = "green",  to = "yellow"},
@@ -49,7 +49,7 @@ describe("fsm", function ()
 
   describe("#is", function()
     before_each(function ()
-      m = fsm.create({
+      m = fsm.new({
         initial = "green",
         events = {
           {name = "warn",  from = "green",  to = "yellow"},
@@ -109,7 +109,7 @@ describe("fsm", function ()
 
   describe("#can(not)", function ()
     before_each(function ()
-      m = fsm.create({
+      m = fsm.new({
         initial = "green",
         events = {
           {name = "warn",  from = "green",  to = "yellow"},
@@ -184,7 +184,7 @@ describe("fsm", function ()
   describe("#transitions", function()
     describe("with single states", function ()
       before_each(function ()
-        m = fsm.create({
+        m = fsm.new({
           initial = "green",
           events = {
             {name = "warn",  from = "green",  to = "yellow"},
@@ -232,7 +232,7 @@ describe("fsm", function ()
 
     describe("with multiple states", function ()
       before_each(function ()
-        m = fsm.create({
+        m = fsm.new({
           events = {
             {name = "start", from = "none",              to = "green" },
             {name = "warn",  from = {"green", "red"},    to = "yellow"},
@@ -280,7 +280,7 @@ describe("fsm", function ()
 
   describe("#is_pending", function ()
     before_each(function ()
-      m = fsm.create({
+      m = fsm.new({
         initial = "green",
         events = {
           {name = "warn",  from = "green",  to = "yellow"},
@@ -305,7 +305,7 @@ describe("fsm", function ()
   describe("#is_finished", function ()
     describe("with terminal state", function ()
       before_each(function ()
-        m = fsm.create({
+        m = fsm.new({
           initial = "green",
           terminal = "red",
           events = {
@@ -333,7 +333,7 @@ describe("fsm", function ()
 
     describe("without terminal state", function ()
       before_each(function ()
-        m = fsm.create({
+        m = fsm.new({
           initial = "green",
           events = {
             {name = "warn",  from = "green",  to = "yellow"},
@@ -361,7 +361,7 @@ describe("fsm", function ()
 
   describe("event return values", function ()
     before_each(function ()
-      m = fsm.create({
+      m = fsm.new({
         initial = "stopped",
         events = {
           {name = "prepare", from = "stopped", to = "ready"  },
@@ -422,7 +422,7 @@ describe("fsm", function ()
 
   describe("invalid events", function ()
     before_each(function ()
-      m = fsm.create({
+      m = fsm.new({
         initial = "green",
         events = {
           {name = "warn",  from = "green",  to = "yellow"},
@@ -475,7 +475,7 @@ describe("fsm", function ()
 
   describe("invalid transitions", function ()
     before_each(function ()
-      m = fsm.create({
+      m = fsm.new({
         initial = "green",
         events = {
           {name = "warn",  from = "green",  to = "yellow"},
@@ -522,7 +522,7 @@ describe("fsm", function ()
 
   describe("noop transitions (empty 'to')", function ()
     before_each(function ()
-      m = fsm.create({
+      m = fsm.new({
         initial = "green",
         events = {
           {name = "noop",  from = "green"                },
@@ -572,7 +572,7 @@ describe("fsm", function ()
 
   describe("implicit wildcard transitions (empty 'from')", function ()
     before_each(function ()
-      m = fsm.create({
+      m = fsm.new({
         initial = "stopped",
         events = {
           {name = "prepare", from = "stopped", to = "ready"  },
@@ -612,7 +612,7 @@ describe("fsm", function ()
 
   describe("explicit wildcard transitions ('from' set to '*')", function ()
     before_each(function ()
-      m = fsm.create({
+      m = fsm.new({
         initial = "stopped",
         events = {
           {name = "prepare", from = "stopped", to = "ready"  },
@@ -652,7 +652,7 @@ describe("fsm", function ()
 
   describe("deferrable startup", function ()
     before_each(function ()
-      m = fsm.create({
+      m = fsm.new({
         initial = {state = "green", event = "init", defer = true},
         events = {
           {name = "warn",  from = "green",  to = "yellow"},
@@ -680,7 +680,7 @@ describe("fsm", function ()
 
   describe("cancellable event", function ()
     before_each(function ()
-      m = fsm.create({
+      m = fsm.new({
         initial = "green",
         events = {
           {name = "warn",  from = "green", to = "yellow"},
@@ -721,7 +721,7 @@ describe("fsm", function ()
     before_each(function ()
       called = {}
 
-      m = fsm.create({
+      m = fsm.new({
         initial = "green",
         events = {
           {name = "warn",  from = "green",  to = "yellow"},
@@ -805,7 +805,7 @@ describe("fsm", function ()
 
   describe("callbacks throwing errors", function ()
     before_each(function ()
-      m = fsm.create({
+      m = fsm.new({
         initial = "green",
         events = {
           {name = "warn",  from = "green",  to = "yellow"},
