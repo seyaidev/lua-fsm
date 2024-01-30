@@ -2,6 +2,14 @@
 
 A simple finite-state machine implementation for Lua. Based on [@jakesgordon's `javascript-finite-state-machine`](https://github.com/jakesgordon/javascript-state-machine).
 
+## Installation
+
+Just download manually:
+
+```
+$ wget https://github.com/seyaidev/lua-fsm/raw/master/src/fsm.lua
+```
+
 ## Usage
 
 ### Initialization
